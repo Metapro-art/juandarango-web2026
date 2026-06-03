@@ -2,400 +2,575 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>JUAN D ARANGO</title>
-  <meta name="description" content="Guitarist, Producer and Educator" />
+  <title>JUAN D ARANGO — Guitarist · Producer · Educator</title>
+  <meta name="description" content="Juan D Arango — guitarist, composer, producer and educator based in Bogotá. Music, lessons, transcriptions and more." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <meta property="og:title" content="Juan D Arango" />
+  <meta property="og:description" content="Guitarist · Producer · Educator" />
+  <meta property="og:image" content="https://juandarango.com/15.jpg" />
+  <meta property="og:type" content="website" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-    /* ── NAV BRAND NAME ── */
-    .nav-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
-      font-weight: 300;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #fff;
-      white-space: nowrap;
-      line-height: 1;
-    }
-
-    /* On very small screens hide the brand text so nav links fit */
-    @media (max-width: 420px) {
-      .nav-brand { display: none; }
-    }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 80px 1.25rem 3rem;
-      text-align: center;
-    }
-
-    /* Photo frame */
-    .hero-photo-wrap {
-      position: relative;
-      /* fluid: grows to 250px max, shrinks on small screens */
-      width: min(250px, 72vw);
-      aspect-ratio: 250 / 318;
-      margin-bottom: 2rem;
-      animation: fadeUp 0.9s ease both;
-      flex-shrink: 0;
-    }
-    .hero-photo-wrap::before {
-      content: ''; position: absolute; inset: -1px;
-      border: 1px solid #2a2a2a; pointer-events: none; z-index: 1;
-    }
-    .hero-photo-wrap::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 0; right: 0; height: 45%;
-      background: linear-gradient(to top, var(--bg) 5%, transparent);
-      z-index: 2;
-    }
-    .hero-photo {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center 15%;
-      display: block; filter: grayscale(10%);
-    }
-
-    /* Text block */
-    .hero-content { animation: fadeUp 0.9s 0.2s ease both; width: 100%; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 6.5vw, 3.4rem);
-      font-weight: 300; letter-spacing: 0.18em;
-      color: #fff; text-transform: uppercase; line-height: 1;
-    }
-    .hero-sub {
-      margin-top: 0.65rem; font-size: clamp(0.55rem, 1.8vw, 0.65rem);
-      font-weight: 500; letter-spacing: 0.32em;
-      text-transform: uppercase; color: var(--accent);
-    }
-    .hero-divider {
-      width: 28px; height: 1px; background: var(--accent);
-      margin: 1.4rem auto; opacity: 0.5;
-    }
-
-    /* Button column */
-    .btn-group {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 0.6rem;
-      animation: fadeUp 0.9s 0.32s ease both;
-      width: 100%;
-    }
-    .hero-btn {
-      display: flex; align-items: center; justify-content: center;
-      /* fluid width: fills screen on mobile, caps at 252px on desktop */
-      width: min(252px, 88vw);
-      padding: 0.72rem 1.5rem; min-height: 46px;
-      font-family: 'Raleway', sans-serif;
-      font-size: clamp(0.6rem, 2vw, 0.68rem);
-      font-weight: 600; letter-spacing: 0.2em;
-      text-transform: uppercase; text-decoration: none;
-      color: var(--text); border: 1px solid var(--border);
-      background: transparent; cursor: pointer;
-      transition: border-color 0.2s, background 0.2s, color 0.2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .hero-btn:hover,
-    .hero-btn:active { border-color: var(--accent); background: var(--accent-dim); color: #fff; }
-    .hero-btn-accent { border-color: rgba(200,146,58,0.5); color: var(--accent); }
-
-    /* Subscribe section below hero */
-    .subscribe-section {
-      max-width: 400px; width: 100%;
-      margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
-      border-top: 1px solid var(--border);
-    }
-    .subscribe-section .label { margin-bottom: 1.2rem; }
-    .subscribe-form {
-      display: flex; flex-direction: column; gap: 0.65rem; width: 100%;
-    }
-    /* inputs: 1rem font-size prevents iOS auto-zoom */
-    .form-input {
-      background: #111; border: 1px solid var(--border); color: var(--text);
-      padding: 0.75rem 1rem; font-family: 'Raleway', sans-serif;
-      font-size: 1rem; width: 100%; outline: none;
-      transition: border-color 0.2s;
-      -webkit-appearance: none; border-radius: 0;
-    }
-    .form-input:focus { border-color: var(--accent); }
-    .form-input::placeholder { color: var(--muted); font-size: 0.88rem; }
-    .subscribe-note { font-size: 0.68rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5; }
-
-
-    /* ── HERO SOCIAL ICONS ROW ── */
-    .hero-socials {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      /* same width as the buttons above */
-      width: min(252px, 88vw);
-      /* match the button border to visually frame them */
-      border: 1px solid var(--border);
-      padding: 0.55rem 0;
-      margin-top: 0;
-    }
-    .hero-social-link {
-      display: flex; align-items: center; justify-content: center;
-      width: 44px; height: 44px;
-      color: var(--muted);
-      border-bottom: none !important;
-      transition: color 0.2s;
-      -webkit-tap-highlight-color: transparent;
-      flex-shrink: 0;
-    }
-    .hero-social-link:hover,
-    .hero-social-link:active { color: var(--accent); }
-    .hero-social-link svg {
-      width: 18px; height: 18px; fill: currentColor;
-      pointer-events: none;
-    }
-
-    /* Tighten subscribe padding on small screens */
-    @media (max-width: 480px) {
-      .hero { padding-top: 72px; padding-bottom: 2rem; }
-      .hero-sub { letter-spacing: 0.2em; }
-      .subscribe-section { padding: 2rem 0.5rem 4rem; }
-    }
-
-    /* ── SUBSCRIBE FORM — Mailchimp native form, restyled to match the site ── */
-    #mc_embed_signup {
-      background: transparent; width: 100%; max-width: 100%;
-      font-family: 'Raleway', sans-serif; clear: none;
-    }
-    #mc_embed_signup form { padding: 0; margin: 0; }
-    #mc_embed_signup h2,
-    #mc_embed_signup .indicates-required { display: none; }
-
-    /* field labels hidden (we use placeholders); error labels un-hidden below */
-    #mc_embed_signup .mc-field-group > label {
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0,0,0,0); border: 0;
-    }
-    #mc_embed_signup .mc-field-group { margin: 0 0 0.65rem; padding: 0; }
-
-    #mc_embed_signup input[type="email"],
-    #mc_embed_signup input[type="text"],
-    #mc_embed_signup select {
-      width: 100%; background: #111; border: 1px solid var(--border); color: var(--text);
-      padding: 0.78rem 1rem; min-height: 48px; margin: 0;
-      font-family: 'Raleway', sans-serif; font-size: 1rem; line-height: 1.3;
-      outline: none; border-radius: 0;
-      -webkit-appearance: none; -moz-appearance: none; appearance: none;
-      transition: border-color 0.2s;
-    }
-    #mc_embed_signup input::placeholder { color: var(--muted); }
-    #mc_embed_signup input:focus,
-    #mc_embed_signup select:focus { border-color: var(--accent); }
-
-    /* country dropdown arrow + muted placeholder state */
-    #mc_embed_signup select {
-      cursor: pointer; padding-right: 2.6rem;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23888' stroke-width='1.5' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 1rem center;
-    }
-    #mc_embed_signup select.mc-placeholder { color: var(--muted); }
-    #mc_embed_signup select option { color: #e8e8e8; background: #111; }
-
-    /* Mailchimp inline field errors (un-hide + restyle to match) */
-    #mc_embed_signup label.mce_inline_error,
-    #mc_embed_signup .mce_inline_error {
-      position: static !important; width: auto !important; height: auto !important;
-      clip: auto !important; overflow: visible !important; display: block;
-      background: transparent !important; color: #cf6a4c !important;
-      font-size: 0.7rem !important; font-weight: 400 !important;
-      letter-spacing: 0.02em; margin: 0.4rem 0 0 !important; padding: 0 !important;
-    }
-    #mc_embed_signup input.mce_inline_error,
-    #mc_embed_signup select.mce_inline_error { border-color: #cf6a4c !important; }
-
-    /* submit button: gold fills in on hover */
-    #mc_embed_signup .button,
-    #mc_embed_signup input[type="submit"] {
-      width: 100%; height: auto; min-height: 48px; margin: 0.35rem 0 0;
-      padding: 0.85rem 1.5rem; font-family: 'Raleway', sans-serif;
-      font-size: clamp(0.62rem, 2vw, 0.7rem); font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent);
-      background: transparent; border: 1px solid rgba(200,146,58,0.5);
-      cursor: pointer; -webkit-appearance: none; border-radius: 0;
-      -webkit-tap-highlight-color: transparent;
-      transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-    }
-    #mc_embed_signup .button:hover,
-    #mc_embed_signup input[type="submit"]:hover,
-    #mc_embed_signup .button:focus-visible {
-      background: var(--accent); color: #080808; border-color: var(--accent);
-    }
-
-    /* response messages (success / error) */
-    #mc_embed_signup #mce-responses { padding: 0; margin: 0; width: 100%; }
-    #mc_embed_signup #mce-responses .response {
-      float: none; width: 100% !important; margin: 0.8rem 0 0 !important; padding: 0 !important;
-      font-size: 0.74rem; letter-spacing: 0.02em; line-height: 1.5;
-    }
-    #mc_embed_signup #mce-success-response { color: var(--accent) !important; }
-    #mc_embed_signup #mce-error-response { color: #cf6a4c !important; }
-    #mc_embed_signup #mce-error-response a { color: #cf9a4c; text-decoration: underline; }
-
-    /* reCAPTCHA spacing (Mailchimp injects it through its script) */
-    #mc_embed_signup .g-recaptcha,
-    #mc_embed_signup div[class*="recaptcha"] { margin: 0.9rem 0 0; }
-
-    /* Mailchimp referral badge (required on the free plan) — kept subtle */
-    #mc_embed_signup .optionalParent p { text-align: center; opacity: 0.55; margin: 1rem auto 0; }
-    .subscribe-note { font-size: 0.68rem; color: var(--muted); margin-top: 0.7rem; line-height: 1.5; }
-  </style>
   <!-- Mailchimp Connected Site -->
   <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/34073d49955d02f85a9efe89b/a3cc4bc0c7d71db1e49f2e972.js");</script>
+
+  <style>
+  /* ============================================================
+     JUAN D ARANGO — 2026 editorial redesign
+     ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08070a;
+    --bg-soft: #0e0d10;
+    --line: rgba(233,227,218,0.09);
+    --line-2: rgba(233,227,218,0.17);
+    --text: #ece7df;
+    --muted: #989089;
+    --faint: #645e57;
+    --gold: #c8923a;
+    --gold-2: #e3bd72;
+    --gold-soft: rgba(200,146,58,0.45);
+    --gold-dim: rgba(200,146,58,0.12);
+    --err: #cf6a4c;
+    --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans: 'Raleway', system-ui, sans-serif;
+    --maxw: 1140px;
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-weight: 400; line-height: 1.8;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    position: relative;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--gold); color: #0a0806; }
+
+  /* custom scrollbar (desktop) */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #211d1a; border: 3px solid var(--bg); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: #322b25; }
+
+  /* atmosphere: warm glow from above + edge vignette + faint grain */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(120% 80% at 50% -8%, rgba(200,146,58,0.10), transparent 42%),
+      radial-gradient(130% 130% at 50% 105%, transparent 58%, rgba(0,0,0,0.55));
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; gap: 1rem;
+    height: 72px; padding: 0 clamp(1.1rem, 5vw, 2.5rem);
+    transition: height .35s ease, background .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.is-scrolled {
+    height: 60px; background: rgba(8,7,10,0.72);
+    backdrop-filter: blur(16px) saturate(120%); -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo { margin-right: auto; display: flex; align-items: center; gap: 0.6rem; }
+  .nav-logo img { height: 26px; width: auto; }
+  .nav-brand {
+    font-family: var(--serif); font-weight: 400; font-size: 1.02rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #fff; white-space: nowrap; line-height: 1;
+  }
+  .nav-links { display: flex; align-items: center; gap: 0.2rem; }
+  .nav-links a {
+    position: relative; padding: 0.6rem 0.9rem; font-size: 0.66rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    transition: color .25s ease;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0.9rem; right: 0.9rem; bottom: 0.35rem; height: 1px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* ── BUTTONS ── */
+  .btn {
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    min-height: 50px; padding: 0.9rem 1.9rem; overflow: hidden; cursor: pointer;
+    font-family: var(--sans); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold); background: transparent;
+    border: 1px solid var(--gold-soft); -webkit-tap-highlight-color: transparent;
+    transition: color .4s ease, border-color .4s ease;
+  }
+  .btn::before {
+    content: ''; position: absolute; inset: 0; background: var(--gold);
+    transform: translateY(101%); z-index: 0; transition: transform .45s cubic-bezier(.7,0,.2,1);
+  }
+  .btn > span { position: relative; z-index: 1; }
+  .btn:hover, .btn:focus-visible { color: #0a0806; border-color: var(--gold); outline: none; }
+  .btn:hover::before, .btn:focus-visible::before { transform: translateY(0); }
+  .btn-ghost { color: var(--text); border-color: var(--line-2); }
+  .btn-ghost::before { background: var(--gold-dim); }
+  .btn-ghost:hover, .btn-ghost:focus-visible { color: #fff; border-color: var(--gold-soft); }
+
+  /* ── SOCIAL ICONS ── */
+  .s-link {
+    display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    color: var(--muted); transition: color .25s ease, transform .25s ease; -webkit-tap-highlight-color: transparent;
+  }
+  .s-link:hover { color: var(--gold); transform: translateY(-2px); }
+  .s-link svg { width: 17px; height: 17px; fill: currentColor; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 2; min-height: 100vh; min-height: 100svh;
+    display: flex; align-items: center;
+    padding: 108px clamp(1.25rem, 5vw, 2.5rem) 7rem;
+  }
+  .hero-inner {
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem, 6vw, 5rem);
+    align-items: center; width: 100%; max-width: var(--maxw); margin: 0 auto;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
+  }
+  .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); opacity: 0.7; }
+  .hero-name {
+    margin-top: 1.5rem; font-family: var(--serif); font-weight: 300;
+    font-size: clamp(2.9rem, 9.2vw, 6.6rem); line-height: 0.92; letter-spacing: 0.015em;
+    text-transform: uppercase; color: #fff;
+  }
+  .hero-name .amp { font-style: italic; font-weight: 300; color: var(--gold); }
+  .hero-role {
+    margin-top: 1.35rem; font-size: clamp(0.6rem, 1.5vw, 0.72rem); font-weight: 500;
+    letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted);
+  }
+  .hero-tag { margin-top: 1.6rem; max-width: 38ch; font-size: 0.95rem; color: var(--muted); line-height: 1.85; }
+  .hero-cta { margin-top: 2.3rem; display: flex; flex-wrap: wrap; gap: 0.7rem; }
+  .hero-socials { margin-top: 1.7rem; display: flex; gap: 0.35rem; margin-left: -0.6rem; }
+
+  /* hero media (framed portrait) */
+  .hero-media { position: relative; width: min(420px, 80vw); aspect-ratio: 600 / 900; justify-self: end; }
+  .hero-frame { position: absolute; top: 18px; left: 18px; right: -18px; bottom: -18px; border: 1px solid var(--gold-soft); }
+  .hero-media__img { position: relative; width: 100%; height: 100%; overflow: hidden; }
+  .hero-media__img img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 12%;
+    filter: grayscale(34%) brightness(0.92) contrast(1.04);
+    transform: scale(1.001); animation: kenburns 19s ease-in-out infinite alternate;
+  }
+  .hero-media__img::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, rgba(8,7,10,0.58), transparent 48%);
+  }
+  @keyframes kenburns { from { transform: scale(1.001); } to { transform: scale(1.07); } }
+
+  /* hero scroll cue */
+  .hero-scroll {
+    position: absolute; left: 50%; bottom: 1.9rem; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+    font-size: 0.56rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--faint);
+  }
+  .hero-scroll .l { width: 1px; height: 44px; background: linear-gradient(var(--gold), transparent); transform-origin: top; animation: scrollPulse 2.3s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100% { opacity: 0.35; transform: scaleY(0.55); } 50% { opacity: 1; transform: scaleY(1); } }
+
+  /* hero load reveal */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  .hero-text > * { opacity: 0; animation: fadeUp 0.95s cubic-bezier(.2,.7,.2,1) forwards; }
+  .hero-text > *:nth-child(1) { animation-delay: 0.10s; }
+  .hero-text > *:nth-child(2) { animation-delay: 0.20s; }
+  .hero-text > *:nth-child(3) { animation-delay: 0.30s; }
+  .hero-text > *:nth-child(4) { animation-delay: 0.40s; }
+  .hero-text > *:nth-child(5) { animation-delay: 0.50s; }
+  .hero-text > *:nth-child(6) { animation-delay: 0.60s; }
+  .hero-media { opacity: 0; animation: fadeUp 1.15s 0.35s cubic-bezier(.2,.7,.2,1) forwards; }
+
+  /* ── SECTION SHELL ── */
+  .section {
+    position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto;
+    padding: clamp(5rem, 11vh, 8.5rem) clamp(1.25rem, 5vw, 2.5rem);
+  }
+  .section--divider { border-top: 1px solid var(--line); }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+  }
+  .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); opacity: 0.65; }
+  .section-title {
+    font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 5vw, 3.4rem);
+    letter-spacing: 0.02em; line-height: 1.04; color: #fff;
+  }
+  .section-lead { margin-top: 1.2rem; max-width: 52ch; font-size: 0.96rem; color: var(--muted); line-height: 1.85; }
+
+  /* ── STATEMENT ── */
+  .statement {
+    font-family: var(--serif); font-weight: 300; font-size: clamp(1.55rem, 3.4vw, 2.35rem);
+    line-height: 1.46; color: #dad5cc; max-width: 22ch; max-width: 920px;
+  }
+  .statement .gild { color: var(--gold-2); font-style: italic; }
+
+  .link-arrow {
+    display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 2.2rem;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+    border-bottom: 1px solid var(--gold-soft); padding-bottom: 0.3rem;
+    transition: gap .3s ease, color .3s ease, border-color .3s ease;
+  }
+  .link-arrow svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+  .link-arrow:hover { gap: 1rem; color: var(--gold-2); border-color: var(--gold-2); }
+
+  /* ── LISTEN ── */
+  .player {
+    margin-top: 2.6rem; border: 1px solid var(--line); padding: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0));
+  }
+  .player iframe { display: block; width: 100%; border: 0; }
+  .listen-links { margin-top: 1.8rem; display: flex; flex-wrap: wrap; gap: 0.7rem 2rem; }
+
+  /* ── ROWS (education) ── */
+  .rows { margin-top: 2.6rem; border-top: 1px solid var(--line); }
+  .row {
+    display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    padding: 1.7rem 0.2rem; border-bottom: 1px solid var(--line);
+    transition: padding-left .35s ease, background .35s ease;
+  }
+  .row:hover { padding-left: 0.9rem; background: linear-gradient(90deg, var(--gold-dim), transparent 70%); }
+  .row-title { font-family: var(--serif); font-weight: 400; font-size: clamp(1.25rem, 2.7vw, 1.7rem); color: #fff; letter-spacing: 0.01em; transition: color .3s ease; }
+  .row:hover .row-title { color: var(--gold-2); }
+  .row-desc { margin-top: 0.35rem; font-size: 0.84rem; color: var(--muted); line-height: 1.6; max-width: 52ch; }
+  .row-arrow { flex-shrink: 0; color: var(--gold); transition: transform .35s ease; }
+  .row-arrow svg { width: 26px; height: 26px; stroke: currentColor; fill: none; }
+  .row:hover .row-arrow { transform: translateX(8px); }
+
+  /* ── SUBSCRIBE (Mailchimp native form, restyled) ── */
+  .subscribe-wrap { max-width: 480px; }
+  #mc_embed_signup { background: transparent; width: 100%; max-width: 100%; font-family: var(--sans); clear: none; margin-top: 2.4rem; }
+  #mc_embed_signup form { padding: 0; margin: 0; }
+  #mc_embed_signup h2, #mc_embed_signup .indicates-required { display: none; }
+  #mc_embed_signup .mc-field-group > label {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;
+  }
+  #mc_embed_signup .mc-field-group { margin: 0 0 0.7rem; padding: 0; }
+  #mc_embed_signup input[type="email"], #mc_embed_signup input[type="text"], #mc_embed_signup select {
+    width: 100%; background: #100f12; border: 1px solid var(--line-2); color: var(--text);
+    padding: 0.85rem 1rem; min-height: 50px; margin: 0;
+    font-family: var(--sans); font-size: 1rem; line-height: 1.3; outline: none; border-radius: 0;
+    -webkit-appearance: none; -moz-appearance: none; appearance: none; transition: border-color .25s ease, background .25s ease;
+  }
+  #mc_embed_signup input::placeholder { color: var(--muted); }
+  #mc_embed_signup input:focus, #mc_embed_signup select:focus { border-color: var(--gold); background: #14121541; }
+  #mc_embed_signup select {
+    cursor: pointer; padding-right: 2.6rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23989089' stroke-width='1.5' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 1rem center;
+  }
+  #mc_embed_signup select.mc-placeholder { color: var(--muted); }
+  #mc_embed_signup select option { color: var(--text); background: #100f12; }
+  #mc_embed_signup label.mce_inline_error, #mc_embed_signup .mce_inline_error {
+    position: static !important; width: auto !important; height: auto !important; clip: auto !important;
+    overflow: visible !important; display: block; background: transparent !important; color: var(--err) !important;
+    font-size: 0.7rem !important; font-weight: 400 !important; letter-spacing: 0.02em; margin: 0.4rem 0 0 !important; padding: 0 !important;
+  }
+  #mc_embed_signup input.mce_inline_error, #mc_embed_signup select.mce_inline_error { border-color: var(--err) !important; }
+  #mc_embed_signup .button, #mc_embed_signup input[type="submit"] {
+    width: 100%; height: auto; min-height: 52px; margin: 0.4rem 0 0; padding: 0.9rem 1.5rem;
+    font-family: var(--sans); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); background: transparent; border: 1px solid var(--gold-soft);
+    cursor: pointer; -webkit-appearance: none; border-radius: 0; -webkit-tap-highlight-color: transparent;
+    transition: color .3s ease, background .3s ease, border-color .3s ease;
+  }
+  #mc_embed_signup .button:hover, #mc_embed_signup input[type="submit"]:hover, #mc_embed_signup .button:focus-visible {
+    background: var(--gold); color: #0a0806; border-color: var(--gold);
+  }
+  #mc_embed_signup #mce-responses { padding: 0; margin: 0; width: 100%; }
+  #mc_embed_signup #mce-responses .response {
+    float: none; width: 100% !important; margin: 0.8rem 0 0 !important; padding: 0 !important;
+    font-size: 0.74rem; letter-spacing: 0.02em; line-height: 1.5;
+  }
+  #mc_embed_signup #mce-success-response { color: var(--gold-2) !important; }
+  #mc_embed_signup #mce-error-response { color: var(--err) !important; }
+  #mc_embed_signup #mce-error-response a { color: #cf9a4c; text-decoration: underline; }
+  #mc_embed_signup .g-recaptcha, #mc_embed_signup div[class*="recaptcha"] { margin: 0.9rem 0 0; }
+  #mc_embed_signup .optionalParent p { text-align: left; opacity: 0.5; margin: 1rem 0 0; }
+  .subscribe-note { font-size: 0.7rem; color: var(--muted); margin-top: 0.8rem; line-height: 1.55; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    position: relative; z-index: 2; border-top: 1px solid var(--line); text-align: center;
+    padding: clamp(3rem, 7vh, 5rem) clamp(1.25rem, 5vw, 2.5rem) 2.6rem;
+  }
+  .site-footer .f-logo img { height: 50px; width: auto; margin: 0 auto 1.6rem; opacity: 0.85; transition: opacity .3s ease; }
+  .site-footer .f-logo:hover img { opacity: 1; }
+  .foot-socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.6rem; }
+  .foot-copy { font-size: 0.62rem; letter-spacing: 0.1em; color: var(--faint); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 880px) {
+    .hero { padding-top: 100px; padding-bottom: 5rem; min-height: auto; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2.6rem; text-align: center; justify-items: center; }
+    .hero-media { order: -1; justify-self: center; width: min(300px, 70vw); }
+    .hero-eyebrow, .eyebrow { }
+    .hero-tag { margin-left: auto; margin-right: auto; }
+    .hero-cta { justify-content: center; }
+    .hero-socials { justify-content: center; margin-left: 0; }
+    .hero-scroll { display: none; }
+  }
+  @media (max-width: 600px) {
+    .nav-links a { padding: 0.5rem 0.55rem; font-size: 0.6rem; letter-spacing: 0.14em; }
+    .row { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+    .row:hover { padding-left: 0.2rem; }
+    .row-arrow { display: none; }
+  }
+  @media (max-width: 420px) {
+    .nav-brand { display: none; }
+    .hero-name { letter-spacing: 0.005em; }
+  }
+
+  /* ── REDUCED MOTION ── */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+    .hero-text > *, .hero-media { opacity: 1 !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .hero-media__img img { animation: none; }
+  }
+  </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    <img src="logo192.png" alt="Juan D Arango">
+<!-- ================= NAV ================= -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo" aria-label="Juan D Arango — home">
+    <img src="logo192.png" alt="Juan D Arango" />
     <span class="nav-brand">Juan D Arango</span>
   </a>
-  <a href="bio.html">Bio</a>
-  <a href="https://linktr.ee/juandarango" target="_blank">Music</a>
-  <a href="store.html">Store</a>
+  <div class="nav-links">
+    <a href="#listen">Music</a>
+    <a href="store.html">Store</a>
+    <a href="bio.html">Bio</a>
+    <a href="#subscribe">Newsletter</a>
+  </div>
 </nav>
 
+<!-- ================= HERO ================= -->
 <section class="hero">
-  <div class="hero-photo-wrap">
-    <img class="hero-photo" src="15.jpg" alt="Juan D Arango performing" />
-  </div>
-  <div class="hero-content">
-    <h1 class="hero-name">Juan D Arango</h1>
-    <p class="hero-sub">Guitarist &nbsp;·&nbsp; Producer &nbsp;·&nbsp; Educator</p>
-    <div class="hero-divider"></div>
-    <div class="btn-group">
-      <a class="hero-btn hero-btn-accent" href="https://linktr.ee/juandarango" target="_blank">Music</a>
-      <a class="hero-btn" href="store.html" target="_self">Education / Store</a>
-      <a class="hero-btn" href="bio.html">Bio</a>
-      <a class="hero-btn" href="https://www.youtube.com/@JuanDArango" target="_blank">YouTube</a>
-      <div class="hero-socials">
-        <a href="https://www.youtube.com/@JuanDArango" target="_blank" aria-label="YouTube" class="hero-social-link">
-          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/juan.aol/" target="_blank" aria-label="Instagram" class="hero-social-link">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
-        <a href="https://www.tiktok.com/@ahum.music?_r=1&_t=ZS-95D6JWfVumy" target="_blank" aria-label="TikTok" class="hero-social-link">
-          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.13 8.13 0 0 0 4.77 1.52V6.75a4.85 4.85 0 0 1-1-.06z"/></svg>
-        </a>
-        <a href="https://open.spotify.com/artist/7cBUWzZg1YbrCXO0m0YnQh" target="_blank" aria-label="Spotify" class="hero-social-link">
-          <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-eyebrow">Bogotá · Colombia</span>
+      <h1 class="hero-name">Juan&nbsp;D<br/>Arango</h1>
+      <p class="hero-role">Guitarist &nbsp;·&nbsp; Producer &nbsp;·&nbsp; Educator</p>
+      <p class="hero-tag">Records as a bandleader, interdisciplinary productions and a deep practice in improvisation — from the stage to the studio to the classroom.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#listen"><span>Listen</span></a>
+        <a class="btn btn-ghost" href="store.html"><span>Lessons &amp; Store</span></a>
       </div>
+      <div class="hero-socials">
+        <a class="s-link" href="https://www.youtube.com/@JuanDArango" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a class="s-link" href="https://open.spotify.com/artist/7cBUWzZg1YbrCXO0m0YnQh" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+        <a class="s-link" href="https://www.instagram.com/juan.aol/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a class="s-link" href="https://www.tiktok.com/@ahum.music?_r=1&_t=ZS-95D6JWfVumy" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.13 8.13 0 0 0 4.77 1.52V6.75a4.85 4.85 0 0 1-1-.06z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <span class="hero-frame" aria-hidden="true"></span>
+      <div class="hero-media__img">
+        <img src="15.jpg" alt="Juan D Arango performing" fetchpriority="high" />
+      </div>
+    </div>
+  </div>
+
+  <a class="hero-scroll" href="#about" aria-label="Scroll down">
+    <span>Scroll</span>
+    <span class="l" aria-hidden="true"></span>
+  </a>
+</section>
+
+<!-- ================= STATEMENT ================= -->
+<section class="section" id="about">
+  <span class="eyebrow reveal">About</span>
+  <p class="statement reveal">
+    Based in Bogotá, Juan D Arango is a guitarist, composer and producer who treats
+    <span class="gild">improvisation</span> as the architecture of his music. He performs with
+    AKA&nbsp;Trio and Mèdulla, produces interdisciplinary work under the name
+    <span class="gild">AHUM</span>, and teaches guitar at Universidad Sergio Arboleda and
+    Universidad Pedagógica Nacional.
+  </p>
+  <a class="link-arrow reveal" href="bio.html">
+    Read the full story
+    <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- ================= LISTEN ================= -->
+<section class="section section--divider" id="listen">
+  <span class="eyebrow reveal">Listen</span>
+  <h2 class="section-title reveal">Music</h2>
+  <p class="section-lead reveal">Records as a bandleader, collaborations and productions — streaming everywhere.</p>
+
+  <div class="player reveal">
+    <iframe title="Juan D Arango on Spotify" style="border-radius:8px"
+      src="https://open.spotify.com/embed/artist/7cBUWzZg1YbrCXO0m0YnQh?utm_source=generator&amp;theme=0"
+      width="100%" height="352" frameborder="0" loading="lazy"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+  </div>
+
+  <div class="listen-links reveal">
+    <a class="link-arrow" href="https://linktr.ee/juandarango" target="_blank" rel="noopener">
+      Full discography
+      <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="link-arrow" href="https://www.youtube.com/@JuanDArango" target="_blank" rel="noopener">
+      Watch on YouTube
+      <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section class="section section--divider" id="education">
+  <span class="eyebrow reveal">Education</span>
+  <h2 class="section-title reveal">Lessons &amp; Materials</h2>
+  <p class="section-lead reveal">Learn from years of practice — lessons, transcriptions, e-books, tabs and MIDI.</p>
+
+  <div class="rows reveal">
+    <a class="row" href="https://www.patreon.com/juandarango" target="_blank" rel="noopener">
+      <div class="row-main">
+        <div class="row-title">Patreon</div>
+        <div class="row-desc">Monthly access to lessons, transcriptions and exclusive content.</div>
+      </div>
+      <span class="row-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="row" href="https://juandarango.gumroad.com/" target="_blank" rel="noopener">
+      <div class="row-main">
+        <div class="row-title">Online Store</div>
+        <div class="row-desc">1-hour lessons, e-books, transcriptions, sheets, tabs, MIDI and audio tracks.</div>
+      </div>
+      <span class="row-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="row" href="https://www.youtube.com/playlist?list=PLOYHbYHzIwJBFDjGUzG2X9zJr_UcEL08U" target="_blank" rel="noopener">
+      <div class="row-main">
+        <div class="row-title">Lesson Library</div>
+        <div class="row-desc">The full catalogue of available lessons and transcriptions on YouTube.</div>
+      </div>
+      <span class="row-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+</section>
+
+<!-- ================= SUBSCRIBE (Mailchimp native form) ================= -->
+<section class="section section--divider" id="subscribe">
+  <span class="eyebrow reveal">Newsletter</span>
+  <h2 class="section-title reveal">Stay Updated</h2>
+  <p class="section-lead reveal">Updates on lessons, e-books, transcriptions, new music and more — straight to your inbox.</p>
+
+  <div class="subscribe-wrap reveal">
+    <div id="mc_embed_signup">
+      <form action="https://juandarango.us4.list-manage.com/subscribe/post?u=34073d49955d02f85a9efe89b&amp;id=32242a610a&amp;f_id=001705e9f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
+        <div id="mc_embed_signup_scroll">
+          <div class="mc-field-group">
+            <label for="mce-EMAIL">Email Address</label>
+            <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email address *" required value="" />
+          </div>
+          <div class="mc-field-group">
+            <label for="mce-FNAME">First Name</label>
+            <input type="text" name="FNAME" class="required text" id="mce-FNAME" placeholder="First name *" required value="" />
+          </div>
+          <div class="mc-field-group">
+            <label for="mce-MMERGE6">Country</label>
+            <select name="MMERGE6" class="required" id="mce-MMERGE6">
+              <option value="" selected>Select your country *</option>
+            </select>
+          </div>
+          <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display:none;"></div>
+            <div class="response" id="mce-success-response" style="display:none;"></div>
+          </div>
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input type="text" name="b_34073d49955d02f85a9efe89b_32242a610a" tabindex="-1" value="" />
+          </div>
+          <div class="optionalParent">
+            <div class="clear foot">
+              <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe" />
+              <p style="margin:0 auto;"><a href="http://eepurl.com/pmTVqrSpZw" title="Mailchimp - email marketing made easy and fun"><span style="display:inline-block;background-color:#100f12;border-radius:4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-light.svg" alt="Intuit Mailchimp" style="width:200px;height:36px;display:flex;padding:2px 0;justify-content:center;align-items:center;" /></span></a></p>
+            </div>
+          </div>
+          <p class="subscribe-note">No spam — just the good stuff, now and then.</p>
+        </div>
+      </form>
     </div>
   </div>
 </section>
 
-<section class="subscribe-section">
-  <span class="label">Stay Updated</span>
-  <div id="mc_embed_signup">
-    <form action="https://juandarango.us4.list-manage.com/subscribe/post?u=34073d49955d02f85a9efe89b&amp;id=32242a610a&amp;f_id=001705e9f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
-      <div id="mc_embed_signup_scroll">
-        <div class="mc-field-group">
-          <label for="mce-EMAIL">Email Address</label>
-          <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email address *" required value="" />
-        </div>
-        <div class="mc-field-group">
-          <label for="mce-FNAME">First Name</label>
-          <input type="text" name="FNAME" class="required text" id="mce-FNAME" placeholder="First name *" required value="" />
-        </div>
-        <div class="mc-field-group">
-          <label for="mce-MMERGE6">Country</label>
-          <select name="MMERGE6" class="required" id="mce-MMERGE6">
-            <option value="" selected>Select your country *</option>
-          </select>
-        </div>
-        <div id="mce-responses" class="clear foot">
-          <div class="response" id="mce-error-response" style="display:none;"></div>
-          <div class="response" id="mce-success-response" style="display:none;"></div>
-        </div>
-        <div aria-hidden="true" style="position:absolute;left:-5000px;">
-          <input type="text" name="b_34073d49955d02f85a9efe89b_32242a610a" tabindex="-1" value="" />
-        </div>
-        <div class="optionalParent">
-          <div class="clear foot">
-            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe" />
-            <p style="margin:0 auto;"><a href="http://eepurl.com/pmTVqrSpZw" title="Mailchimp - email marketing made easy and fun"><span style="display:inline-block;background-color:#111;border-radius:4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-light.svg" alt="Intuit Mailchimp" style="width:200px;height:36px;display:flex;padding:2px 0;justify-content:center;align-items:center;" /></span></a></p>
-          </div>
-        </div>
-        <p class="subscribe-note">Updates on lessons, e-books, transcriptions, new music and more.</p>
-      </div>
-    </form>
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <a class="f-logo" href="index.html" aria-label="Juan D Arango — home"><img src="logo512.png" alt="Juan D Arango" /></a>
+  <div class="foot-socials">
+    <a class="s-link" href="https://www.instagram.com/juan.aol/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+    <a class="s-link" href="https://www.patreon.com/juandarango" target="_blank" rel="noopener" aria-label="Patreon"><svg viewBox="0 0 24 24"><path d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21 0 3.96-3.22 7.18-7.18 7.18-3.97 0-7.21-3.22-7.21-7.18 0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"/></svg></a>
+    <a class="s-link" href="https://juandarango.gumroad.com/" target="_blank" rel="noopener" aria-label="Store"><svg viewBox="0 0 24 24"><path d="M13.5 0A10.5 10.5 0 0 0 3 10.5v.525A10.5 10.5 0 0 0 13.5 21H15v-4.5h-1.5a6 6 0 1 1 6-6V12h-3v2.25h3V21h3v-9A10.5 10.5 0 0 0 13.5 0Z"/></svg></a>
+    <a class="s-link" href="https://open.spotify.com/artist/7cBUWzZg1YbrCXO0m0YnQh" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+    <a class="s-link" href="https://www.youtube.com/@JuanDArango" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+    <a class="s-link" href="https://www.tiktok.com/@ahum.music?_r=1&_t=ZS-95D6JWfVumy" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.13 8.13 0 0 0 4.77 1.52V6.75a4.85 4.85 0 0 1-1-.06z"/></svg></a>
   </div>
-</section>
-
-<footer>
-  <div class="footer-logo">
-    <a href="index.html"><img src="logo192.png" alt="Juan D Arango"></a>
-  </div>
-  <div class="social-links">
-    <a href="https://www.instagram.com/juan.aol/" target="_blank" aria-label="Instagram">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      Instagram
-    </a>
-    <a href="https://www.patreon.com/juandarango" target="_blank" aria-label="Patreon">
-      <svg viewBox="0 0 24 24"><path d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21 0 3.96-3.22 7.18-7.18 7.18-3.97 0-7.21-3.22-7.21-7.18 0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"/></svg>
-      Patreon
-    </a>
-    <a href="https://juandarango.gumroad.com/" target="_blank" aria-label="Store">
-      <svg viewBox="0 0 24 24"><path d="M13.5 0A10.5 10.5 0 0 0 3 10.5v.525A10.5 10.5 0 0 0 13.5 21H15v-4.5h-1.5a6 6 0 1 1 6-6V12h-3v2.25h3V21h3v-9A10.5 10.5 0 0 0 13.5 0Z"/></svg>
-      Store
-    </a>
-    <a href="https://open.spotify.com/artist/7cBUWzZg1YbrCXO0m0YnQh" target="_blank" aria-label="Spotify">
-      <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-      Spotify
-    </a>
-    <a href="https://www.youtube.com/@JuanDArango" target="_blank" aria-label="YouTube">
-      <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      YouTube
-    </a>
-    <a href="https://www.tiktok.com/@ahum.music?_r=1&_t=ZS-95D6JWfVumy" target="_blank" aria-label="TikTok">
-      <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.13 8.13 0 0 0 4.77 1.52V6.75a4.85 4.85 0 0 1-1-.06z"/></svg>
-      TikTok
-    </a>
-  </div>
-  <p class="footer-copy">© Juan D Arango 2026. All rights reserved.</p>
+  <p class="foot-copy">© Juan D Arango 2026 · All rights reserved.</p>
 </footer>
 
+<!-- ================= SCRIPTS ================= -->
 <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 <script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[6]='MMERGE6';ftypes[6]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 <script>
 (function () {
+  /* Country dropdown */
   var sel = document.getElementById('mce-MMERGE6');
-  if (!sel) return;
-  var COUNTRIES = ["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo (Republic)","Congo (DRC)","Costa Rica","Côte d'Ivoire","Croatia","Cuba","Cyprus","Czechia","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
-  var frag = document.createDocumentFragment();
-  for (var i = 0; i < COUNTRIES.length; i++) {
-    var o = document.createElement('option');
-    o.value = COUNTRIES[i]; o.textContent = COUNTRIES[i];
-    frag.appendChild(o);
+  if (sel) {
+    var COUNTRIES = ["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo (Republic)","Congo (DRC)","Costa Rica","Côte d'Ivoire","Croatia","Cuba","Cyprus","Czechia","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < COUNTRIES.length; i++) {
+      var o = document.createElement('option');
+      o.value = COUNTRIES[i]; o.textContent = COUNTRIES[i];
+      frag.appendChild(o);
+    }
+    sel.appendChild(frag);
+    var sync = function () { sel.classList.toggle('mc-placeholder', sel.value === ''); };
+    sync();
+    sel.addEventListener('change', sync);
   }
-  sel.appendChild(frag);
-  function sync() { sel.classList.toggle('mc-placeholder', sel.value === ''); }
-  sync();
-  sel.addEventListener('change', sync);
+
+  /* Nav scroll state */
+  var nav = document.getElementById('nav');
+  var onScroll = function () { if (nav) nav.classList.toggle('is-scrolled', window.scrollY > 40); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* Scroll reveals */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    for (var j = 0; j < els.length; j++) els[j].classList.add('is-visible');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  }
 })();
 </script>
 </body>
 </html>
-
