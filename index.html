@@ -172,7 +172,94 @@
       .hero-sub { letter-spacing: 0.2em; }
       .subscribe-section { padding: 2rem 0.5rem 4rem; }
     }
+
+    /* ── SUBSCRIBE FORM — modern, inline (sends to Mailchimp in the background) ── */
+    .sub-field { position: relative; }
+
+    /* Country dropdown styled to match the inputs */
+    .form-select {
+      -webkit-appearance: none; -moz-appearance: none; appearance: none;
+      min-height: 48px; cursor: pointer; color: var(--text);
+      background-color: #111;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23888' stroke-width='1.5' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center;
+      padding-right: 2.6rem;
+    }
+    .form-select.is-placeholder { color: var(--muted); }
+    .form-select option { color: #e8e8e8; background: #111; }
+
+    /* Inline field errors */
+    .sub-error {
+      display: block; font-size: 0.7rem; color: #cf6a4c; letter-spacing: 0.02em;
+      margin-top: 0.4rem; opacity: 0; transform: translateY(-2px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .sub-field.has-error .form-input { border-color: #cf6a4c; }
+    .sub-field.has-error .sub-error { opacity: 1; transform: none; }
+    .sub-shake { animation: subShake 0.35s ease; }
+    @keyframes subShake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-5px); } 40% { transform: translateX(5px); }
+      60% { transform: translateX(-3px); } 80% { transform: translateX(3px); }
+    }
+
+    /* Submit button: gold fills up on hover, spinner while sending */
+    .sub-button {
+      position: relative; width: 100%; margin-top: 0.35rem; min-height: 48px;
+      padding: 0.85rem 1.5rem; font-family: 'Raleway', sans-serif;
+      font-size: clamp(0.62rem, 2vw, 0.7rem); font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent);
+      background: transparent; border: 1px solid rgba(200,146,58,0.5);
+      cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent;
+      transition: color 0.35s ease, border-color 0.35s ease;
+    }
+    .sub-button::before {
+      content: ''; position: absolute; inset: 0; background: var(--accent);
+      transform: translateY(101%); z-index: 0;
+      transition: transform 0.4s cubic-bezier(0.7, 0, 0.2, 1);
+    }
+    .sub-button:hover, .sub-button:focus-visible { color: #080808; border-color: var(--accent); }
+    .sub-button:hover::before, .sub-button:focus-visible::before { transform: translateY(0); }
+    .sub-button-label { position: relative; z-index: 1; }
+    .sub-button.is-loading { pointer-events: none; }
+    .sub-button.is-loading .sub-button-label { visibility: hidden; }
+    .sub-spinner {
+      position: absolute; top: 50%; left: 50%; width: 16px; height: 16px;
+      margin: -8px 0 0 -8px; border: 2px solid rgba(200,146,58,0.3);
+      border-top-color: var(--accent); border-radius: 50%; opacity: 0; z-index: 1;
+    }
+    .sub-button.is-loading .sub-spinner { opacity: 1; animation: subSpin 0.7s linear infinite; }
+    @keyframes subSpin { to { transform: rotate(360deg); } }
+
+    /* Top-level message (already subscribed / error) */
+    .sub-feedback { font-size: 0.72rem; letter-spacing: 0.02em; margin-top: 0.7rem; line-height: 1.5; }
+    .sub-feedback.is-warn { color: #cf9a4c; }
+    .sub-feedback.is-error { color: #cf6a4c; }
+
+    /* Success panel (replaces the form, no new tab) */
+    .subscribe-success { text-align: center; padding: 0.5rem 0 0.25rem; animation: subFade 0.5s ease both; }
+    @keyframes subFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .success-ring {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 1px solid rgba(200,146,58,0.5);
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+    }
+    .success-check { width: 24px; height: 24px; }
+    .success-check path {
+      fill: none; stroke: var(--accent); stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+      stroke-dasharray: 30; stroke-dashoffset: 30;
+      animation: subDraw 0.5s 0.15s ease forwards;
+    }
+    @keyframes subDraw { to { stroke-dashoffset: 0; } }
+    .success-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300;
+      letter-spacing: 0.08em; text-transform: uppercase; color: #fff; margin-bottom: 0.4rem;
+    }
+    .success-sub { font-size: 0.8rem; color: #aaa; line-height: 1.55; margin: 0; }
   </style>
+  <!-- Mailchimp Connected Site -->
+  <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/34073d49955d02f85a9efe89b/a3cc4bc0c7d71db1e49f2e972.js");</script>
 </head>
 <body>
 
@@ -219,18 +306,38 @@
 
 <section class="subscribe-section">
   <span class="label">Stay Updated</span>
-  <form
-    action="https://juandarango.us4.list-manage.com/subscribe/post?u=34073d49955d02f85a9efe89b&amp;id=32242a610a&amp;f_id=001705e9f0"
-    method="post" class="subscribe-form validate" target="_blank" novalidate>
-    <input type="email" name="EMAIL" class="form-input required email" placeholder="Email address *" required />
-    <input type="text"  name="FNAME"   class="form-input required"      placeholder="First name *"    required />
-    <input type="text"  name="MMERGE6" class="form-input required"      placeholder="Country *"       required />
-    <div style="position:absolute;left:-5000px" aria-hidden="true">
-      <input type="text" name="b_34073d49955d02f85a9efe89b_32242a610a" tabindex="-1" value="">
+  <form id="subscribe-form" class="subscribe-form" novalidate>
+    <div class="sub-field">
+      <input type="email" id="sub-email" name="EMAIL" class="form-input" placeholder="Email address *" autocomplete="email" />
+      <span class="sub-error" id="err-email"></span>
     </div>
-    <button type="submit" class="btn" style="width:100%">Subscribe</button>
+    <div class="sub-field">
+      <input type="text" id="sub-fname" name="FNAME" class="form-input" placeholder="First name *" autocomplete="given-name" />
+      <span class="sub-error" id="err-fname"></span>
+    </div>
+    <div class="sub-field">
+      <select id="sub-country" name="MMERGE6" class="form-input form-select is-placeholder" autocomplete="country-name" aria-label="Country">
+        <option value="" disabled selected>Select your country *</option>
+      </select>
+      <span class="sub-error" id="err-country"></span>
+    </div>
+    <div style="position:absolute;left:-5000px" aria-hidden="true">
+      <input type="text" name="b_34073d49955d02f85a9efe89b_32242a610a" tabindex="-1" value="" autocomplete="off" />
+    </div>
+    <button type="submit" id="sub-button" class="sub-button">
+      <span class="sub-button-label">Subscribe</span>
+      <span class="sub-spinner" aria-hidden="true"></span>
+    </button>
+    <p class="sub-feedback" id="sub-feedback" role="status" aria-live="polite" hidden></p>
     <p class="subscribe-note">Updates on lessons, e-books, transcriptions, new music and more.</p>
   </form>
+  <div class="subscribe-success" id="subscribe-success" role="status" aria-live="polite" hidden>
+    <div class="success-ring">
+      <svg class="success-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L10 18.5 L20 6.5" /></svg>
+    </div>
+    <p class="success-title">You're on the list</p>
+    <p class="success-sub" id="success-sub">Check your inbox to confirm your subscription.</p>
+  </div>
 </section>
 
 <footer>
@@ -266,6 +373,143 @@
   <p class="footer-copy">© Juan D Arango 2026. All rights reserved.</p>
 </footer>
 
+<script>
+(function () {
+  var form = document.getElementById('subscribe-form');
+  if (!form) return;
+
+  var emailEl   = document.getElementById('sub-email');
+  var fnameEl   = document.getElementById('sub-fname');
+  var countryEl = document.getElementById('sub-country');
+  var button    = document.getElementById('sub-button');
+  var feedback  = document.getElementById('sub-feedback');
+  var successEl = document.getElementById('subscribe-success');
+  var successSub = document.getElementById('success-sub');
+  var loadedAt  = Date.now();
+
+  var COUNTRIES = ["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo (Republic)","Congo (DRC)","Costa Rica","Côte d'Ivoire","Croatia","Cuba","Cyprus","Czechia","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
+
+  var frag = document.createDocumentFragment();
+  for (var i = 0; i < COUNTRIES.length; i++) {
+    var opt = document.createElement('option');
+    opt.value = COUNTRIES[i];
+    opt.textContent = COUNTRIES[i];
+    frag.appendChild(opt);
+  }
+  countryEl.appendChild(frag);
+
+  function syncPlaceholder() {
+    if (countryEl.value === '') countryEl.classList.add('is-placeholder');
+    else countryEl.classList.remove('is-placeholder');
+  }
+  syncPlaceholder();
+
+  var fields = [
+    { el: emailEl,   id: 'err-email',   test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }, msg: 'Please enter a valid email address.' },
+    { el: fnameEl,   id: 'err-fname',   test: function (v) { return v.trim().length > 0; }, msg: 'Please enter your first name.' },
+    { el: countryEl, id: 'err-country', test: function (v) { return v.trim().length > 0; }, msg: 'Please select your country.' }
+  ];
+
+  function wrapOf(el) { return el.closest('.sub-field'); }
+  function clearError(el) {
+    var w = wrapOf(el); if (!w) return;
+    w.classList.remove('has-error', 'sub-shake');
+    var e = w.querySelector('.sub-error'); if (e) e.textContent = '';
+  }
+  function setError(f) {
+    var w = wrapOf(f.el); if (!w) return;
+    w.classList.remove('sub-shake'); void w.offsetWidth;
+    w.classList.add('has-error', 'sub-shake');
+    var e = document.getElementById(f.id); if (e) e.textContent = f.msg;
+  }
+  function clearAll() { fields.forEach(function (f) { clearError(f.el); }); hideFeedback(); }
+  function validate() {
+    var firstBad = null;
+    fields.forEach(function (f) { if (!f.test(f.el.value)) { setError(f); if (!firstBad) firstBad = f.el; } });
+    if (firstBad) { firstBad.focus(); return false; }
+    return true;
+  }
+
+  [emailEl, fnameEl].forEach(function (el) {
+    el.addEventListener('input', function () {
+      var f = fields.find(function (x) { return x.el === el; });
+      if (wrapOf(el).classList.contains('has-error') && f && f.test(el.value)) clearError(el);
+    });
+  });
+  countryEl.addEventListener('change', function () { syncPlaceholder(); clearError(countryEl); });
+
+  function setLoading(on) {
+    if (on) { button.classList.add('is-loading'); button.disabled = true; }
+    else { button.classList.remove('is-loading'); button.disabled = false; }
+  }
+  function showFeedback(text, kind) {
+    feedback.textContent = text;
+    feedback.className = 'sub-feedback ' + (kind === 'warn' ? 'is-warn' : 'is-error');
+    feedback.hidden = false;
+  }
+  function hideFeedback() { feedback.hidden = true; feedback.textContent = ''; }
+  function showSuccess(msg) {
+    if (successSub) {
+      successSub.textContent = /confirm|email/i.test(msg || '')
+        ? 'Check your inbox to confirm your subscription.'
+        : "You're all set — thanks for subscribing.";
+    }
+    form.style.display = 'none';
+    successEl.hidden = false;
+  }
+
+  function mcJsonp(url, cb) {
+    var cbName = 'mcjsonp_' + Date.now() + '_' + Math.floor(Math.random() * 1e6);
+    var script = document.createElement('script');
+    var done = false;
+    var timer = setTimeout(function () { finish({ result: 'error', msg: 'timeout' }); }, 12000);
+    function cleanup() {
+      clearTimeout(timer);
+      try { delete window[cbName]; } catch (e) { window[cbName] = undefined; }
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+    function finish(data) { if (done) return; done = true; cleanup(); cb(data); }
+    window[cbName] = function (data) { finish(data); };
+    script.onerror = function () { finish({ result: 'error', msg: 'network' }); };
+    script.src = url + (url.indexOf('?') > -1 ? '&' : '?') + 'c=' + cbName;
+    document.body.appendChild(script);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearAll();
+
+    var hp = form.querySelector('input[name^="b_"]');
+    if (hp && hp.value !== '') return;           // honeypot tripped → bot
+    if (Date.now() - loadedAt < 1000) return;    // instant submit → bot
+    if (!validate()) return;
+
+    setLoading(true);
+    var base = 'https://juandarango.us4.list-manage.com/subscribe/post-json?u=34073d49955d02f85a9efe89b&id=32242a610a';
+    var params =
+      '&EMAIL='   + encodeURIComponent(emailEl.value.trim()) +
+      '&FNAME='   + encodeURIComponent(fnameEl.value.trim()) +
+      '&MMERGE6=' + encodeURIComponent(countryEl.value.trim()) +
+      '&b_34073d49955d02f85a9efe89b_32242a610a=';
+
+    mcJsonp(base + params, function (data) {
+      setLoading(false);
+      if (data && data.result === 'success') {
+        showSuccess(data.msg);
+        return;
+      }
+      var clean = ((data && data.msg) ? String(data.msg) : '').replace(/<[^>]*>/g, '').trim();
+      if (/already subscribed/i.test(clean)) {
+        showFeedback('This email is already on the list — thanks for being here.', 'warn');
+      } else if (/too many/i.test(clean)) {
+        showFeedback('Too many attempts right now. Please try again in a little while.', 'error');
+      } else {
+        showFeedback("That didn't go through. Please check your details and try again.", 'error');
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
 
